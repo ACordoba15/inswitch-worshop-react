@@ -1,4 +1,5 @@
 import axios from "axios";
+import { walletId } from "./constants";
 
 export const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_PUBLIC_BASE_URL}`,
@@ -34,6 +35,41 @@ export const getAccessToken = async () => {
   );
   return response?.data?.access_token;
 };
+
+export const AddPaymentMethod = async () => {
+    const token = await getAccessToken()
+    const response = await axiosInstance.post(
+        `${import.meta.env.VITE_PUBLIC_API_WALLET}/${walletId}/paymentmethods`,
+        {
+          paymentMethodAlias: "My USD emoney account",
+          paymentMethodType: "emoney-usd",
+          paymentMethodStatus: "active",
+          inactiveReason: null,
+          paymentMethodData: {
+            ACCOUNT_ID: "13848",
+            maxBalance: "999999999",
+            overdraft: "0",
+          },
+          paymentMethodLinkData: [
+            {
+              key: "string",
+              value: "string",
+            },
+          ],
+          paymentMethodMetadata: [
+            {
+              key: "string",
+              value: "string",
+            },
+          ],
+        },
+        {
+          headers: {
+            "X-User-Bearer": `Bearer ${token}`,
+          },
+        }
+      );
+}
 
 export function getDarkColor() {
   var color = "#";
