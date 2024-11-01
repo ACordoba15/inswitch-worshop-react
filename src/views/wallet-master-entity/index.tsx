@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { axiosInstance, getAccessToken } from "../../utils/genericOps";
 import { entityMaster } from "../../utils/constants";
 import "./index.css";
+import Button from "../../components/button/button";
 
 export default function WalletMasterEntity(props: any) {
   const [entity, setEntity] = useState<any>({});
@@ -31,6 +32,7 @@ export default function WalletMasterEntity(props: any) {
           {entity?.entityType === "legalEntity" ? "Entidad legal" : "Persona fisica"}
         </h2>
         <h2>Fecha de creación: {entity?.creationDate}</h2>
+        <Button/>
       </div>
     </>
   );

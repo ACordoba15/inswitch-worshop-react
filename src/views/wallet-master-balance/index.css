@@ -22,6 +22,15 @@
   gap: 20px;
 }
 
+.cards-container {
+  padding: 14px;
+  display: flex;
+  flex: 1 1; 
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (min-width: 1000px) {
   .master-wallet-balance__carrousel {
     scrollbar-width: none;

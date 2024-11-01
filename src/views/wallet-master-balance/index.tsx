@@ -1,6 +1,5 @@
-import React from "react";
 import useGetBalance from "../../hooks/useGetBalance";
-import { entityMaster } from "../../utils/constants";
+import {entityMaster } from "../../utils/constants";
 import "./index.css";
 import CardBalance from "../../components/card-balance";
 
@@ -11,7 +10,7 @@ export default function WalletMasterBalance() {
     <div className="master-wallet-balance">
       {loading && <h1>Cargando...</h1>}
       {error && <h1>Error al cargar el balance</h1>}
-      <div className="master-wallet-balance__carrousel">
+      <div className="cards-container">
         {balance?.map((paymentMethod: any) => (
           <CardBalance
             key={paymentMethod.paymentMethodReference}
