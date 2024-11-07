@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { axiosInstance, getAccessToken } from "../utils/genericOps";
+import { axiosInstance, getAccessToken, getBalances } from "../utils/genericOps";
 
 export default function useGetBalance(entityId: number) {
   const [balance, setBalance] = useState();
@@ -10,16 +10,8 @@ export default function useGetBalance(entityId: number) {
     const getBalance = async () => {
       setLoading(true);
       try {
-        const token = await getAccessToken();
-        const entityBalanceRequest = await axiosInstance.get(
-          `${import.meta.env.VITE_PUBLIC_API_WALLET}/entityid%40${entityId}/balance`,
-          {
-            headers: {
-              "X-User-Bearer": `Bearer ${token}`,
-            },
-          }
-        );
-        setBalance(entityBalanceRequest.data);
+        const entityBalanceRequest = await getBalances(entityId)
+        setBalance(entityBalanceRequest);
       } catch (err: any) {
         setError(err);
       } finally {
