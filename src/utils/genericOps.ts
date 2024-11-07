@@ -71,6 +71,19 @@ export const AddPaymentMethod = async () => {
       );
 }
 
+export async function getBalances (entityId: number) {
+    const token = await getAccessToken();
+    const entityBalanceRequest = await axiosInstance.get(
+        `${import.meta.env.VITE_PUBLIC_API_WALLET}/entityid%40${entityId}/balance`,
+        {
+        headers: {
+            "X-User-Bearer": `Bearer ${token}`,
+        },
+        }
+    );
+    return entityBalanceRequest.data;
+}
+
 export function getDarkColor() {
   var color = "#";
   for (var i = 0; i < 6; i++) {
